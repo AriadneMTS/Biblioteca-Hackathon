@@ -46,7 +46,7 @@ class AutorController extends Controller
         $autor = Autor::find($id);
 
         if(!$autor) {
-            return Response()->json([], 404);
+            return Response()->json(null, 404);
         }
 
         return Response()->json($autor);
@@ -71,7 +71,7 @@ class AutorController extends Controller
 
         $autor->update($dados);
 
-        return Response()->json([], 204);
+        return Response()->json(null, 204);
     }
 
     /**
@@ -81,6 +81,6 @@ class AutorController extends Controller
     {
         Autor::destroy($id);
 
-        return Response()->json([], 204);
+        return Response()->json(null, 204);
     }
 }
