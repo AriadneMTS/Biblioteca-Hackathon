@@ -11,4 +11,14 @@ class Aluno extends Model
 
     protected $fillable = ['ra', 'nome', 'endereco', 'cidade', 'uf', 'telefone', 'curso']; 
 
+
+    public function index()
+
+    {
+
+    $Alunos = Aluno::all();
+    return response()->json($Alunos);
+    
+   }
+
 }

@@ -21,4 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::resource('/livros', LivroController::class);
+Route::resource('/alunos', AlunoController::class);
+
 
