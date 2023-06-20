@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\LivroController;
-use App\Models\Livro;
+use App\Http\Controllers\AutorController;
+use App\Http\Controllers\ReservaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +20,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::resource('/autores', AutorController::class);
+Route::resource('/reservas', ReservaController::class);
 Route::resource('/livros', LivroController::class);
 Route::resource('/alunos', AlunoController::class);
 

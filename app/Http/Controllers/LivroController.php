@@ -13,15 +13,14 @@ class LivroController extends Controller
     {
         $livros = Livro::get();
 
-        return view('livros.index', [
-            'livros' => $livros
-        ]);
+        return Response()->json($livros);
+        
     }
 
 
     public function create()
     {
-        return view('livros.create');
+        
     }
 
    
@@ -30,51 +29,47 @@ class LivroController extends Controller
     {
         $dados = $request->except('_token');
 
-        Livro::create($dados);
+        $livro = Livro::create($dados);
 
-        return redirect('/livros');
+        return Response()->json($livro, 201);
     }
 
    
 
-    public function show(int $id)
+    public function show(string $id)
     {
         $livro = Livro::find($id);
 
-        return view('livros.show', [
-            'livro' => $livro
-        ]);
+        if(!$livro) {
+            return Response()->json(null, 404);
+        };
+
+        return Response()->json($livro);
+
+
+
+       
     }
 
    
 
     public function edit(int $id)
     {
-        $livro = Livro::find($id);
-        return view('livros.edit', [
-            'livro'=> $livro
-        ]);
+        
     }
 
     
 
-    public function update(int $id, Request $request)
+    public function update(string $id, Request $request)
     {
         $dados = $request->except("_token");
-        $aluno = Livro::find($id);
-        $aluno->update([
 
-            "titulo" => $dados['titulo'],
-            "subtitulo" => $dados['subtitulo'],
-            "isbn" => $dados['isbn'],
-            "autor" => $dados['autor'],
-            "editora" => $dados['editora'],
-            "local" => $dados['local'],
-            "ano" => $dados['ano']
+        $livro = Livro::find($id);
 
-        ]);
+        $livro->update($dados);
 
-        return redirect('/livros');
+        return Response()->json(null, 204);
+        
     }
 
    

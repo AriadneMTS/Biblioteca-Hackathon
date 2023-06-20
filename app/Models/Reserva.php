@@ -9,6 +9,14 @@ class Reserva extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['aluno', 'livro', 'dataInicio', 'dataFim', 'observacao']; 
+    protected $fillable = ['aluno', 'livro', 'dataInicio', 'dataFim', 'observacao'];
+
+    public function livro() {
+        return $this->belongsTo(Livro::class);
+    }
+
+    public function aluno() {
+        return $this->belongsTo(Aluno::class);
+    }
 
 }
