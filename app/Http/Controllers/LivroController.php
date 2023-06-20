@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Livro;
 use App\Http\Controllers\Controller;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 
 class LivroController extends Controller
@@ -80,6 +81,6 @@ class LivroController extends Controller
     public function destroy(int $id)
     {
         Livro::destroy($id);
-        return redirect('/livros');
+        return Response()->json(null, 204);
     }
 }
