@@ -9,6 +9,18 @@ class Livro extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['titulo', 'subtitulo', 'isbn', 'autor', 'editora', 'local', 'ano']; 
+    protected $fillable = ['titulo', 'sutitulo', 'isbn', 'autor', 'editora', 'local', 'ano']; 
+
+    public function autor() {
+        return $this->belongsTo(Autor::class);
+    }
+
+    public function editora() {
+        return $this->belongsTo(Editora::class);
+    }
+
+    public function reservas() {
+        return $this->hasMany(Reserva::class);
+    }
 
 }
