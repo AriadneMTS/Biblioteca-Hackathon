@@ -9,7 +9,7 @@ class Reserva extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['aluno', 'livro', 'dataInicio', 'dataFim', 'observacao'];
+    protected $fillable = ['aluno_id', 'livro_id', 'dataInicio', 'dataFim', 'observacao'];
 
     public function livro() {
         return $this->belongsTo(Livro::class);
