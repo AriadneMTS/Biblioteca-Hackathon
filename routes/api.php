@@ -23,3 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('/autores', AutorController::class);
 Route::resource('/reservas', ReservaController::class);
 Route::resource('/livros', LivroController::class);
+Route::resource('/alunos', AlunoController::class);
+
+
