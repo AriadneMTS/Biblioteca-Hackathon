@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\AutorController;
+use App\Http\Controllers\LivroController;
 use App\Http\Controllers\ReservaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;

@@ -11,11 +11,9 @@ class AlunoController extends Controller
    
     public function index()
     {
-        $alunos = Aluno::get();
+        $dados = Aluno::get();
 
-        return view('Aluno.index', [
-            'alunos' => $alunos
-        ]);
+        return Response()->json($dados);
     }
 
    
