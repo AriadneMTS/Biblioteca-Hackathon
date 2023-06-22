@@ -25,35 +25,40 @@ class AlunoController extends Controller
     
     public function store(Request $request)
     {
-        //
+        $dados = $request->except('_token');
+
+        $aluno = Aluno::create($dados);
+
+        return Response()->json($aluno, 201);
     }
 
     
     public function show(string $id)
     {
-        $aluno = Aluno::find($id);
+        $aluno = Aluno::find($id); 
+        if(!$aluno) {
+            return Response()->json(null, 404);
+        }
 
-        return view('Aluno.show', [
-            'aluno' => $aluno
-        ]);
+        return Response()->json($aluno);
     }
 
     
     public function edit(string $id)
     {
-        $aluno = Aluno::find($id);
-        return view('alunos.edit', [
-            'aluno'=> $aluno
-        ]);
+       
     }
 
     
     public function update(Request $request, string $id)
     {
+        $dados = $request->except('_token');
+
         $aluno = Aluno::find($id);
-        return view('alunos.edit', [
-            'aluno'=> $aluno
-        ]);
+
+        $aluno->update($dados);
+
+        return Response()->json(null, 204);
         
     }
 
@@ -62,5 +67,15 @@ class AlunoController extends Controller
     {
         Aluno::destroy($id);
         return Response()->json(null, 204);
+    }
+
+    public function getByRa(string $ra) {
+        $aluno = Aluno::where('ra', $ra)->first();
+
+        if(!$aluno) {
+            return Response()->json(null, 404);
+        }
+
+        return Response()->json($aluno);
     }
 }

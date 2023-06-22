@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\AutorController;
+use App\Http\Controllers\CursoController;
 use App\Http\Controllers\EditoraController;
 use App\Http\Controllers\LivroController;
 use App\Http\Controllers\ReservaController;
@@ -26,6 +27,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('/autores', AutorController::class);
 Route::resource('/reservas', ReservaController::class);
 Route::resource('/livros', LivroController::class);
+Route::get('/alunos/ra/{id}', [AlunoController::class, 'getByRa']);
 Route::resource('/alunos', AlunoController::class);
 Route::resource('/cursos', CursoController::class);
 Route::resource('/editoras', EditoraController::class);
