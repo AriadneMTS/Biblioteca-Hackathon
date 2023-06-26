@@ -15,4 +15,11 @@ class Aluno extends Model
         return $this->belongsTo(Curso::class);
     }
 
+    public function reservas() {
+        return $this->hasMany(Reserva::class);
+    }
+
+    public function livros() {
+        return $this->hasManyThrough(Livro::class, Reserva::class);
+    }
 }

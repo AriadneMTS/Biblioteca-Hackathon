@@ -27,7 +27,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('/autores', AutorController::class);
 Route::resource('/reservas', ReservaController::class);
 Route::resource('/livros', LivroController::class);
-Route::get('/alunos/ra/{id}', [AlunoController::class, 'getByRa']);
+Route::get('/alunos/ra/{ra}', [AlunoController::class, 'getByRa']);
+Route::get('/alunos/livros/{ra}', [AlunoController::class, 'getLivrosByRa']);
 Route::resource('/alunos', AlunoController::class);
 Route::resource('/cursos', CursoController::class);
 Route::resource('/editoras', EditoraController::class);

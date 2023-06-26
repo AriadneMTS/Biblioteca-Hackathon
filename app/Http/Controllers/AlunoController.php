@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Aluno;
+use App\Models\Livro;
 use Illuminate\Http\Request;
 
 class AlunoController extends Controller
@@ -70,12 +71,25 @@ class AlunoController extends Controller
     }
 
     public function getByRa(string $ra) {
-        $aluno = Aluno::where('ra', $ra)->first();
+        $aluno = Aluno::where('ra', $ra)->with('curso')->get();
 
         if(!$aluno) {
             return Response()->json(null, 404);
         }
 
         return Response()->json($aluno);
+    }
+
+    public function getLivrosByRa(string $ra) {
+        $aluno = Aluno::where('ra', $ra)->first();
+        if(!$aluno) {
+            return Response()->json(null, 404);
+        }
+
+        $livrosIds = $aluno->reservas->pluck('livro_id');
+
+        $livros = Livro::with('autor', 'editora')->whereIn('id', $livrosIds)->get();
+
+        return Response()->json($livros);
     }
 }

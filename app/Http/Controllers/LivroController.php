@@ -11,7 +11,7 @@ class LivroController extends Controller
     
     public function index()
     {
-        $livros = Livro::get();
+        $livros = Livro::with('autor', 'editora')->get();
 
         return Response()->json($livros);
         
@@ -78,4 +78,5 @@ class LivroController extends Controller
         Livro::destroy($id);
         return Response()->json(null, 204);
     }
+
 }
