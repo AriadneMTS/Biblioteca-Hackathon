@@ -7,25 +7,29 @@ use Illuminate\Http\Request;
 
 class CursoController extends Controller
 {
-    
+
     public function index()
     {
         $cursos = Curso::get();
 
         return Response()->json($cursos);
-        
+
     }
 
-   
+
     public function create()
     {
         //
     }
 
-    
+
     public function store(Request $request)
     {
-        //
+        $dados = $request->except('_token');
+
+        $curso = Curso::create($dados);
+
+        return Response()->json($curso, 201);
     }
 
     /**
@@ -42,13 +46,13 @@ class CursoController extends Controller
         return Response()->json($curso);
     }
 
-    
+
     public function edit(string $id)
     {
-        
+
     }
 
-   
+
     public function update(Request $request, string $id)
     {
         $dados = $request->except("_token");
@@ -60,7 +64,7 @@ class CursoController extends Controller
         return Response()->json(null, 204);
     }
 
-    
+
     public function destroy(string $id)
     {
         Curso::destroy($id);
