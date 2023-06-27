@@ -9,21 +9,21 @@ use Illuminate\Http\Request;
 
 class AlunoController extends Controller
 {
-   
+
     public function index()
     {
-        $dados = Aluno::get();
+        $dados = Aluno::with('curso')->get();
 
         return Response()->json($dados);
     }
 
-   
+
     public function create()
     {
         //
     }
 
-    
+
     public function store(Request $request)
     {
         $dados = $request->except('_token');
@@ -33,10 +33,10 @@ class AlunoController extends Controller
         return Response()->json($aluno, 201);
     }
 
-    
+
     public function show(string $id)
     {
-        $aluno = Aluno::find($id); 
+        $aluno = Aluno::find($id);
         if(!$aluno) {
             return Response()->json(null, 404);
         }
@@ -44,13 +44,13 @@ class AlunoController extends Controller
         return Response()->json($aluno);
     }
 
-    
+
     public function edit(string $id)
     {
-       
+
     }
 
-    
+
     public function update(Request $request, string $id)
     {
         $dados = $request->except('_token');
@@ -60,10 +60,10 @@ class AlunoController extends Controller
         $aluno->update($dados);
 
         return Response()->json(null, 204);
-        
+
     }
 
-   
+
     public function destroy(string $id)
     {
         Aluno::destroy($id);
