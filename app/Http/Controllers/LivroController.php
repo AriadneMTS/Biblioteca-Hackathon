@@ -8,22 +8,22 @@ use Illuminate\Http\Request;
 
 class LivroController extends Controller
 {
-    
+
     public function index()
     {
         $livros = Livro::with('autor', 'editora')->get();
 
         return Response()->json($livros);
-        
+
     }
 
 
     public function create()
     {
-        
+
     }
 
-   
+
 
     public function store(Request $request)
     {
@@ -34,7 +34,7 @@ class LivroController extends Controller
         return Response()->json($livro, 201);
     }
 
-   
+
 
     public function show(string $id)
     {
@@ -45,20 +45,16 @@ class LivroController extends Controller
         };
 
         return Response()->json($livro);
-
-
-
-       
     }
 
-   
+
 
     public function edit(int $id)
     {
-        
+
     }
 
-    
+
 
     public function update(string $id, Request $request)
     {
@@ -69,10 +65,10 @@ class LivroController extends Controller
         $livro->update($dados);
 
         return Response()->json(null, 204);
-        
+
     }
 
-   
+
     public function destroy(int $id)
     {
         Livro::destroy($id);

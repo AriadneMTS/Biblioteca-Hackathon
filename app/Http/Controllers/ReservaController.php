@@ -13,7 +13,7 @@ class ReservaController extends Controller
      */
     public function index()
     {
-        $dados = Reserva::get();
+        $dados = Reserva::with('aluno', 'livro')->get();
 
         return Response()->json($dados);
     }
@@ -31,7 +31,11 @@ class ReservaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dados = $request->except('_token');
+
+        $reserva = Reserva::create($dados);
+
+        return Response()->json($reserva, 201);
     }
 
     /**
@@ -39,7 +43,13 @@ class ReservaController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $reserva = Reserva::find($id);
+
+        if(!$reserva) {
+            return Response()->json(null, 404);
+        };
+
+        return Response()->json($reserva);
     }
 
     /**
@@ -55,7 +65,13 @@ class ReservaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $dados = $request->except("_token");
+
+        $reserva = Reserva::find($id);
+
+        $reserva->update($dados);
+
+        return Response()->json(null, 204);
     }
 
     /**
@@ -63,6 +79,7 @@ class ReservaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Reserva::destroy($id);
+        return Response()->json(null, 204);
     }
 }
